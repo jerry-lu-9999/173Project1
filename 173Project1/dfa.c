@@ -72,7 +72,11 @@ int DFA_get_size(DFA dfa){
 int DFA_get_transition(DFA dfa, int src, char sym){
 	int input = (int) sym;
 	LinkedList list = dfa ->transitionTable[src][input];
+    
+    LinkedList_print_string_list(list);
+    
 	int state = (int)LinkedList_elementAt(list, 0);
+    printf("the state is: %d\n", state);
     return state;
 }
 
@@ -95,6 +99,7 @@ void DFA_set_transition_str(DFA dfa, int src, char *str, int dst) {
 	for(int i = 0; i < sizeof(*str); i++){
 		DFA_set_transition(dfa, src, str[i], dst);
 	}
+   
 }
 
 /**
@@ -115,7 +120,6 @@ void DFA_set_accepting(DFA dfa, int state, bool value){
 	if(value == true){
 		dfa -> acceptingState = state;
 	}
-    printf("ACCEPTING IS FALSE WHEN 0:  %d\n", (int)value);
 }
 
 /**
@@ -173,11 +177,14 @@ int main(int argc, char* argv[]){
 	scanf("%s", input);
 	DFA dfa1a = new_DFA(7);
 	DFA_set_transition(dfa1a, 0, 'c', 1);
+    printf("current state: %d\n", dfa1a->currentState);
 	DFA_set_transition(dfa1a, 1, 's', 2);
 	DFA_set_transition(dfa1a, 2, 'c', 3);
+    printf("current state: %d\n", dfa1a->currentState);
 	DFA_set_transition(dfa1a, 3, '1', 4);
 	DFA_set_transition(dfa1a, 4, '7', 5);
 	DFA_set_transition(dfa1a, 5, '3', 6);
+    printf("current state: %d\n", dfa1a->currentState);
 	DFA_set_accepting(dfa1a, 0, false);
 	DFA_set_accepting(dfa1a, 1, false);
 	DFA_set_accepting(dfa1a, 2, false);
