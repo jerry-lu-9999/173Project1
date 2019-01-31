@@ -73,10 +73,15 @@ int DFA_get_transition(DFA dfa, int src, char sym){
 	int input = (int) sym;
 	LinkedList list = dfa ->transitionTable[src][input];
     
-    LinkedList_print_string_list(list);
     
 	int state = (int)LinkedList_elementAt(list, 0);
-    printf("the state is: %d\n", state);
+//    void* stateee = LinkedList_elementAt(list, 0);
+//    int states = *stateee;
+
+    LinkedList_print_string_list(list);
+    
+//    printf("the state is:%p\n", state);
+//    printf("the state is: %d\n", state);
     return state;
 }
 
@@ -85,9 +90,9 @@ int DFA_get_transition(DFA dfa, int src, char sym){
  * sym to be the state dst.
  */
 void DFA_set_transition(DFA dfa, int src, char sym, int dst){
-	LinkedList_add_at_end(dfa->transitionTable[src][(int)sym], &dst);
+	LinkedList_add_at_front(dfa->transitionTable[src][(int)sym], &dst);
+    LinkedList_print_string_list(dfa->transitionTable[src][(int)sym]);
 	dfa->currentState = dst;
-    
 }
 
 /**
@@ -178,6 +183,7 @@ int main(int argc, char* argv[]){
 	DFA dfa1a = new_DFA(7);
 	DFA_set_transition(dfa1a, 0, 'c', 1);
     printf("current state: %d\n", dfa1a->currentState);
+    printf("current state:::: %d\n", DFA_get_transition(dfa1a, 0, 'c'));
 	DFA_set_transition(dfa1a, 1, 's', 2);
 	DFA_set_transition(dfa1a, 2, 'c', 3);
     printf("current state: %d\n", dfa1a->currentState);

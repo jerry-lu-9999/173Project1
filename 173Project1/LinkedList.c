@@ -14,7 +14,7 @@
  */
 typedef struct Node* Node;
 struct Node {
-	void *data;
+	void* data;
 	Node next;
 	Node prev;
 };
@@ -223,7 +223,6 @@ void* LinkedListIterator_next(LinkedListIterator this) {
 	}
 }
 
-#ifdef MAIN
 
 /**
  * Print the given LinkedList to stdout, assuming that the values are
@@ -240,6 +239,9 @@ void LinkedList_print_string_list(LinkedList this) {
 	}
 	printf("]\n");
 }
+
+#ifdef MAIN
+
 
 int main(int argc, char **argv) {
 	LinkedList list = new_LinkedList();
