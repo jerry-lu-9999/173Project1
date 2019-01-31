@@ -23,6 +23,7 @@ struct Node {
 	int element;
 	struct Node* next;
 };
+
 typedef struct Node Node;
 
 struct IntHashSet {

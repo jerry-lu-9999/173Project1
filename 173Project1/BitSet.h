@@ -22,12 +22,12 @@ typedef struct BitSet* BitSet;
  * Return the largest value that can be stored in a BitSet.
  * BitSets can store elements with values from 0 to this value.
  */
-extern int BitSet_maxValue();
+extern int BitSet_maxValue(void);
 
 /**
  * Allocate, initialize and return a new (empty) BitSet.
  */
-extern BitSet new_BitSet();
+extern BitSet new_BitSet(void);
 
 /**
  * Free the memory used for the given Bitset.

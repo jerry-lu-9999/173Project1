@@ -83,6 +83,7 @@ int DFA_get_transition(DFA dfa, int src, char sym){
 void DFA_set_transition(DFA dfa, int src, char sym, int dst){
 	LinkedList_add_at_end(dfa->transitionTable[src][(int)sym], &dst);
 	dfa->currentState = dst;
+    
 }
 
 /**
@@ -114,6 +115,7 @@ void DFA_set_accepting(DFA dfa, int state, bool value){
 	if(value == true){
 		dfa -> acceptingState = state;
 	}
+    printf("ACCEPTING IS FALSE WHEN 0:  %d\n", (int)value);
 }
 
 /**
@@ -132,20 +134,23 @@ bool DFA_get_accepting(DFA dfa, int state){
  * the input, otherwise false.
  */
 bool DFA_execute(DFA dfa, char *input){
-	//put input inti array for list of
+    //put input inti array for list of
     //checking system to see if symbol is on the DFA_SYMBOL list?
-	//
+    //
 
-	// go through each character of the input
-	for(int i = 0; i < sizeof(input); i++) {
-		int cur = DFA_get_transition(dfa, dfa->currentState, input[i]);
-		if(DFA_get_accepting(dfa, cur)){
-			return true;
-		} else {
-			return false;
-		}
-	}
-	return false;
+    // go through each character of the input
+    printf("this is the beginning of DFA execute");
+    
+    for(int i = 0; i < strlen(input); i++) {
+        int cur = DFA_get_transition(dfa, dfa->currentState, input[i]);
+        printf("\nTHIS IS CUR: %d", cur);
+        //
+        if(DFA_get_accepting(dfa, cur)){
+            printf("\nthis means DDFA GET ACCEPTING IF LOOP IS RUNNING");
+            return true;
+        }
+    }
+    return true; //change later to false
 }
 
 /**
@@ -163,7 +168,7 @@ bool DFA_execute(DFA dfa, char *input){
 
 int main(int argc, char* argv[]){
 //	// Part a
-	char* input="";
+	char input[50];
 	printf("Type a character");
 	scanf("%s", input);
 	DFA dfa1a = new_DFA(7);
@@ -180,10 +185,9 @@ int main(int argc, char* argv[]){
 	DFA_set_accepting(dfa1a, 4, false);
 	DFA_set_accepting(dfa1a, 5, false);
 	DFA_set_accepting(dfa1a, 6, true);
-	if(DFA_execute(dfa1a, input)){
-		printf("yas");
-	} else {
-		printf("fail");
-	}
-	printf("hello");
+    if(DFA_execute(dfa1a, input)){
+        printf("yas");
+    } else {
+        printf("fail");
+    }
 }
