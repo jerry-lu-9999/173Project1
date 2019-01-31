@@ -12,6 +12,7 @@
 		F5844F732202B1DA001DA8AF /* dfa.c in Sources */ = {isa = PBXBuildFile; fileRef = F5844F6E2202B1D9001DA8AF /* dfa.c */; };
 		F5844F742202B1DA001DA8AF /* strdup.c in Sources */ = {isa = PBXBuildFile; fileRef = F5844F6F2202B1D9001DA8AF /* strdup.c */; };
 		F5844F752202B1DA001DA8AF /* LinkedList.c in Sources */ = {isa = PBXBuildFile; fileRef = F5844F702202B1DA001DA8AF /* LinkedList.c */; };
+		F5844F77220392BB001DA8AF /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = F5844F76220392BB001DA8AF /* Makefile */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,6 +41,7 @@
 		F5844F6F2202B1D9001DA8AF /* strdup.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = strdup.c; sourceTree = "<group>"; };
 		F5844F702202B1DA001DA8AF /* LinkedList.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = LinkedList.c; sourceTree = "<group>"; };
 		F5844F712202B1DA001DA8AF /* strdup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = strdup.h; sourceTree = "<group>"; };
+		F5844F76220392BB001DA8AF /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		F5DA96FD2202AE8400070B71 /* 173Project1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = 173Project1; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -57,6 +59,8 @@
 		F5844F632202B103001DA8AF /* 173Project1 */ = {
 			isa = PBXGroup;
 			children = (
+				F5844F76220392BB001DA8AF /* Makefile */,
+				F5844F642202B1B9001DA8AF /* BitSet.c */,
 				F5844F662202B1D8001DA8AF /* BitSet.h */,
 				F5844F6E2202B1D9001DA8AF /* dfa.c */,
 				F5844F6B2202B1D9001DA8AF /* dfa.h */,
@@ -69,7 +73,6 @@
 				F5844F6D2202B1D9001DA8AF /* Set.h */,
 				F5844F6F2202B1D9001DA8AF /* strdup.c */,
 				F5844F712202B1DA001DA8AF /* strdup.h */,
-				F5844F642202B1B9001DA8AF /* BitSet.c */,
 			);
 			path = 173Project1;
 			sourceTree = "<group>";
@@ -146,6 +149,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5844F77220392BB001DA8AF /* Makefile in Sources */,
 				F5844F732202B1DA001DA8AF /* dfa.c in Sources */,
 				F5844F722202B1DA001DA8AF /* IntHashSet.c in Sources */,
 				F5844F652202B1B9001DA8AF /* BitSet.c in Sources */,
@@ -194,7 +198,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -253,7 +257,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -272,6 +276,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				OTHER_CFLAGS = (
+					"-Werror",
+					"-Wall",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -280,6 +288,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				OTHER_CFLAGS = (
+					"-Werror",
+					"-Wall",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
