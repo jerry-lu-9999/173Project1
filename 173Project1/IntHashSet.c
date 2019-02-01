@@ -215,6 +215,9 @@ bool IntHashSet_equals(IntHashSet this, IntHashSet other) {
  * Call the given function on each element of the given
  * IntHashSet, calling the given function on each int value
  * one after the other.
+ * 
+ * SOOOO THIS ITERATE THING PRINTS ELEMENTS IN ORDER ONE BY ONE BUT THOUGH THE FUNCTION PASSED IN 
+ * *****CHECK CALL BACK FUNCTION ABOVE MAIN
  */
 void IntHashSet_iterate(const IntHashSet this, void (*func)(int)) {
 	for (int index=0; index < this->size; index++) {
@@ -335,15 +338,21 @@ int main(int argc, char* argv[]) {
 	IntHashSet_insert(set1, 5);
 	IntHashSet_insert(set1, 6);
 	IntHashSet_insert(set1, 7); // index 0: 0,7,1,2,3,4,5,6
+	// IntHashSet_insert(set1, 88); // index 0: 0,7,1,2,3,4,5,6
+	// IntHashSet_insert(set1, 99); // index 0: 0,7,1,2,3,4,5,6
+
 	IntHashSet_print(set1);
+
 	printf("\n");
 	printf("testing lookup...\n");
 	printf("lookup 0: %d\n", IntHashSet_lookup(set1, 0));
 	printf("lookup 3: %d\n", IntHashSet_lookup(set1, 3));
 	printf("lookup 7: %d\n", IntHashSet_lookup(set1, 7));
 	printf("lookup 8: %d\n", IntHashSet_lookup(set1, 8));
+	
 	printf("testing iterate...\n");
 	IntHashSet_iterate(set1, callback);
+
 	printf("testing iterator...\n");
 	IntHashSetIterator iterator = IntHashSet_iterator(set1);
 	while (IntHashSetIterator_hasNext(iterator)) {
@@ -352,7 +361,8 @@ int main(int argc, char* argv[]) {
 	}
 	printf("\n");
 	printf("freeing iterator\n");
-	free(iterator);
+	free(iterator); //clears the 
+
 	printf("creating new set with size 5...\n");
 	IntHashSet set2 = new_IntHashSet(5);
 	IntHashSet_insert(set2, 0);
