@@ -192,7 +192,7 @@ bool DFA_execute(DFA dfa, char *sym){
 //        }
 //    }
 //}
-void dfa1b(char* input) {
+void dfa1a(char* input) {
     DFA dfa1a = new_DFA(7);
     DFA_set_transition(dfa1a, 0, 'c', 1);
     DFA_set_transition(dfa1a, 1, 's', 2);
@@ -247,7 +247,7 @@ void dfa1c(char* input){
 }
 
 void dfa1d(char* input){
-	DFA dfa1c = new_DFA(4);
+	DFA dfa1d = new_DFA(4);
 	DFA_set_transition(dfa1d, 0, '0', 1);
 	DFA_set_transition(dfa1d, 0, '1', 2);
 	DFA_set_transition(dfa1d, 1, '0', 0);

@@ -10,6 +10,8 @@
 
 #include <stdbool.h>
 #include "Set.h"
+#define NFA_INPUT 128
+
 
 /**
  * The data structure used to represent a nondeterministic finite automaton.
