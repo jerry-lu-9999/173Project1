@@ -15,7 +15,6 @@
 struct DFA {
     int DFA_N_STATE;
     IntHashSet **transitionTable;
-    // char inputSymb[36];
     int currentState;
     int acceptingState;
 };
@@ -31,9 +30,6 @@ DFA new_DFA(int nstates){
     this->DFA_N_STATE = nstates;
     this->currentState = 0;
     this->acceptingState = 1;
-    // this->inputSymb = (char*)malloc( sizeof(char)); //RIP LMAO WE DON'T KNWO IF THIS WORKS
-
-
     this->transitionTable = (IntHashSet**)malloc(nstates*sizeof(IntHashSet*));
 
     for (int i = 0; i < nstates; i++){
@@ -86,9 +82,7 @@ int DFA_get_transition(DFA dfa, int src, char sym){
     int input = convertSymbtoInt(sym);
     printf("\nthis is the current state: %d \n and this is the input: %c", src, sym);
     IntHashSet set = dfa ->transitionTable[src][input];
-
-            
-            printf("\nthis is the set: \n"); // there is nothing in the set
+    printf("\nthis is the set: \n");
             IntHashSet_print(set);
 
     IntHashSetIterator iterator = IntHashSet_iterator(set);
@@ -106,6 +100,7 @@ void DFA_set_transition(DFA dfa, int src, char sym, int dst){
     //must go through array to find sym to numb
     int input = convertSymbtoInt(sym);
 	IntHashSet_insert(dfa->transitionTable[src][input], dst);
+    
     //****prints hashstate correctly
     // printf("printing inthashset in DFA_set_transition: \n");
     // IntHashSet_print(dfa->transitionTable[src][input]);
@@ -173,17 +168,15 @@ bool DFA_execute(DFA dfa, char *sym){
         printf("\nThis is the current state:  %d", dfa->currentState);
         printf("\nThis is the current input: %c   %d", sym[i], input);
         
-        //BUB YOU THE PROBLEM (DFA_get_transition)
         int cur = DFA_get_transition(dfa, dfa->currentState, sym[i]);
         printf("\nTHIS IS CUR: %d", cur);
         dfa->currentState = cur;
         
         if(DFA_get_accepting(dfa, cur)){
-            printf("\nACCEPTING");
+            printf("\nACCEPTING\n");
             return true;
         }
     }
-    printf("SOMETHING AINT WORKING BUB");
     return false; //change later to false
 }
 
@@ -205,20 +198,15 @@ int main(int argc, char* argv[]){
 	// Part a
 
 	char input[50];
-    // char inputSymb[36] = {'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
 	printf("Type a character: ");
 	scanf("%s", input);
 	DFA dfa1a = new_DFA(7);
 	DFA_set_transition(dfa1a, 0, 'c', 1);
-    // printf("current state: %d\n", dfa1a->currentState);
-    // printf("current state:::: %d\n", DFA_get_transition(dfa1a, 0, 'c'));
 	DFA_set_transition(dfa1a, 1, 's', 2);
 	DFA_set_transition(dfa1a, 2, 'c', 3);
-    // printf("current state: %d\n", dfa1a->currentState);
 	DFA_set_transition(dfa1a, 3, '1', 4);
 	DFA_set_transition(dfa1a, 4, '7', 5);
 	DFA_set_transition(dfa1a, 5, '3', 6);
-    // printf("current state: %d\n", dfa1a->currentState);
 	DFA_set_accepting(dfa1a, 0, false);
 	DFA_set_accepting(dfa1a, 1, false);
 	DFA_set_accepting(dfa1a, 2, false);
@@ -227,9 +215,9 @@ int main(int argc, char* argv[]){
 	DFA_set_accepting(dfa1a, 5, false);
 	DFA_set_accepting(dfa1a, 6, true);
     if(DFA_execute(dfa1a, input)){
-        printf("yas");
+        printf("yas\n");
     } else {
-        printf("fail");
+        printf("fail\n");
     }
 
 }

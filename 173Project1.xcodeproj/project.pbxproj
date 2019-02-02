@@ -7,11 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F5844F652202B1B9001DA8AF /* BitSet.c in Sources */ = {isa = PBXBuildFile; fileRef = F5844F642202B1B9001DA8AF /* BitSet.c */; };
 		F5844F722202B1DA001DA8AF /* IntHashSet.c in Sources */ = {isa = PBXBuildFile; fileRef = F5844F6C2202B1D9001DA8AF /* IntHashSet.c */; };
 		F5844F732202B1DA001DA8AF /* dfa.c in Sources */ = {isa = PBXBuildFile; fileRef = F5844F6E2202B1D9001DA8AF /* dfa.c */; };
 		F5844F742202B1DA001DA8AF /* strdup.c in Sources */ = {isa = PBXBuildFile; fileRef = F5844F6F2202B1D9001DA8AF /* strdup.c */; };
-		F5844F752202B1DA001DA8AF /* LinkedList.c in Sources */ = {isa = PBXBuildFile; fileRef = F5844F702202B1DA001DA8AF /* LinkedList.c */; };
 		F5844F77220392BB001DA8AF /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = F5844F76220392BB001DA8AF /* Makefile */; };
 /* End PBXBuildFile section */
 
@@ -28,18 +26,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		F5844F642202B1B9001DA8AF /* BitSet.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BitSet.c; sourceTree = "<group>"; };
-		F5844F662202B1D8001DA8AF /* BitSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitSet.h; sourceTree = "<group>"; };
 		F5844F672202B1D9001DA8AF /* nfa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nfa.h; sourceTree = "<group>"; };
 		F5844F682202B1D9001DA8AF /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
-		F5844F692202B1D9001DA8AF /* LinkedList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinkedList.h; sourceTree = "<group>"; };
 		F5844F6A2202B1D9001DA8AF /* IntHashSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntHashSet.h; sourceTree = "<group>"; };
 		F5844F6B2202B1D9001DA8AF /* dfa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dfa.h; sourceTree = "<group>"; };
 		F5844F6C2202B1D9001DA8AF /* IntHashSet.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = IntHashSet.c; sourceTree = "<group>"; };
 		F5844F6D2202B1D9001DA8AF /* Set.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Set.h; sourceTree = "<group>"; };
 		F5844F6E2202B1D9001DA8AF /* dfa.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dfa.c; sourceTree = "<group>"; };
 		F5844F6F2202B1D9001DA8AF /* strdup.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = strdup.c; sourceTree = "<group>"; };
-		F5844F702202B1DA001DA8AF /* LinkedList.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = LinkedList.c; sourceTree = "<group>"; };
 		F5844F712202B1DA001DA8AF /* strdup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = strdup.h; sourceTree = "<group>"; };
 		F5844F76220392BB001DA8AF /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		F5DA96FD2202AE8400070B71 /* 173Project1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = 173Project1; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,14 +54,10 @@
 			isa = PBXGroup;
 			children = (
 				F5844F76220392BB001DA8AF /* Makefile */,
-				F5844F642202B1B9001DA8AF /* BitSet.c */,
-				F5844F662202B1D8001DA8AF /* BitSet.h */,
 				F5844F6E2202B1D9001DA8AF /* dfa.c */,
 				F5844F6B2202B1D9001DA8AF /* dfa.h */,
 				F5844F6C2202B1D9001DA8AF /* IntHashSet.c */,
 				F5844F6A2202B1D9001DA8AF /* IntHashSet.h */,
-				F5844F702202B1DA001DA8AF /* LinkedList.c */,
-				F5844F692202B1D9001DA8AF /* LinkedList.h */,
 				F5844F672202B1D9001DA8AF /* nfa.h */,
 				F5844F682202B1D9001DA8AF /* README.txt */,
 				F5844F6D2202B1D9001DA8AF /* Set.h */,
@@ -152,8 +142,6 @@
 				F5844F77220392BB001DA8AF /* Makefile in Sources */,
 				F5844F732202B1DA001DA8AF /* dfa.c in Sources */,
 				F5844F722202B1DA001DA8AF /* IntHashSet.c in Sources */,
-				F5844F652202B1B9001DA8AF /* BitSet.c in Sources */,
-				F5844F752202B1DA001DA8AF /* LinkedList.c in Sources */,
 				F5844F742202B1DA001DA8AF /* strdup.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
