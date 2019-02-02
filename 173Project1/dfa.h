@@ -82,4 +82,12 @@ extern bool DFA_execute(DFA dfa, char *input);
  */
 extern void DFA_print(DFA dfa);
 
+extern void dfa1a(char* input);
+
+extern void dfa1b(char* input);
+
+extern void dfa1c(char* input);
+
+extern void dfa1d(char* input);
+
 #endif

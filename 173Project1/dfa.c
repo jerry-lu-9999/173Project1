@@ -126,8 +126,7 @@ void DFA_set_transition_str(DFA dfa, int src, char *str, int dst) {
 void DFA_set_transition_all(DFA dfa, int src, int dst) {
     
 	for(int i = 0; i < DFA_INPUT; i++){
-		//find a way to put all input symbols???????
-//		DFA_set_transition(dfa, src, , dst);
+		IntHashSet_insert(dfa->transitionTable[src][i], dst);
 	}
 }
 
@@ -193,60 +192,84 @@ bool DFA_execute(DFA dfa, char *sym){
 //        }
 //    }
 //}
-void dfapart1(char* input) {
+void dfa1b(char* input) {
     DFA dfa1a = new_DFA(7);
-        DFA_set_transition(dfa1a, 0, 'c', 1);
-        DFA_set_transition(dfa1a, 1, 's', 2);
-        DFA_set_transition(dfa1a, 2, 'c', 3);
-        DFA_set_transition(dfa1a, 3, '1', 4);
-        DFA_set_transition(dfa1a, 4, '7', 5);
-        DFA_set_transition(dfa1a, 5, '3', 6);
-        DFA_set_accepting(dfa1a, 0, false);
-        DFA_set_accepting(dfa1a, 1, false);
-        DFA_set_accepting(dfa1a, 2, false);
-        DFA_set_accepting(dfa1a, 3, false);
-        DFA_set_accepting(dfa1a, 4, false);
-        DFA_set_accepting(dfa1a, 5, false);
-        DFA_set_accepting(dfa1a, 6, true);
+    DFA_set_transition(dfa1a, 0, 'c', 1);
+    DFA_set_transition(dfa1a, 1, 's', 2);
+    DFA_set_transition(dfa1a, 2, 'c', 3);
+    DFA_set_transition(dfa1a, 3, '1', 4);
+    DFA_set_transition(dfa1a, 4, '7', 5);
+    DFA_set_transition(dfa1a, 5, '3', 6);
+    DFA_set_accepting(dfa1a, 0, false);
+    DFA_set_accepting(dfa1a, 1, false);
+    DFA_set_accepting(dfa1a, 2, false);
+    DFA_set_accepting(dfa1a, 3, false);
+    DFA_set_accepting(dfa1a, 4, false);
+   	DFA_set_accepting(dfa1a, 5, false);
+    DFA_set_accepting(dfa1a, 6, true);
+    if(DFA_execute(dfa1a, input)){
+    	printf("Accept 1a\n");
+    } else {
+    	printf("Fail 1a\n");
+    }
+}
 
-        if(DFA_execute(dfa1a, input)){
-            printf("yas\n");
-        } else {
-            printf("fail\n");
-        }
+void dfa1b(char* input){
+	DFA dfa1b = new_DFA(4);
+	DFA_set_transition(dfa1b, 0, 'c', 1);
+	DFA_set_transition(dfa1b, 1, 'a', 2);
+	DFA_set_transition(dfa1b, 2, 't', 3);
+	DFA_set_transition_all(dfa1b, 3, 3);
+	DFA_set_accepting(dfa1b, 0, false);
+	DFA_set_accepting(dfa1b, 1, false);
+	DFA_set_accepting(dfa1b, 2, false);
+	DFA_set_accepting(dfa1b, 3, true);
+	if (DFA_execute(dfa1b, input)){
+		printf("Accept 1b\n");
+	} else {
+		printf("Fail 1b\n");
+	}
 }
-int main(int argc, char* argv[]){
-	char input[50];
-	printf("Type a character: ");
-	scanf("%s", input);
-    dfapart1(input);
-    //parta
-    //compare input and csc173 to enter dfa1a
-    //return 0 when they are equal
-    // if (strncmp(input, "csc173", 6) == 0){
-        
-    // }   //partb
-    //     else if (strncmp(input, "cat", 3) == 0){
-    //     //printf("the compare result is : %d", strncmp(input, "cat", 3));
-    //     DFA dfa1b = new_DFA(4);
-    //     DFA_set_transition(dfa1b, 0, 'c', 1);
-    //     DFA_set_transition(dfa1b, 1, 'a', 2);
-    //     DFA_set_transition(dfa1b, 2, 't', 3);
-        
-    //     //whatever the next letter is, transit back to itself
-    //     for (int i = 3; i < strlen(input); i++) {
-    //         DFA_set_transition(dfa1b, 3, input[i], 3);
-    //     }
-        
-    //     DFA_set_accepting(dfa1b, 0, false);
-    //     DFA_set_accepting(dfa1b, 1, false);
-    //     DFA_set_accepting(dfa1b, 2, false);
-    //     DFA_set_accepting(dfa1b, 3, true);
-        
-    //     if (DFA_execute(dfa1b, input)){
-    //         printf("yas\n");
-    //     } else {
-    //         printf("fail\n");
-    //     }
-    // }
+
+void dfa1c(char* input){
+	DFA dfa1c = new_DFA(2);
+	DFA_set_transition(dfa1c, 0, '1', 0);
+	DFA_set_transition(dfa1c, 0, '0', 1);
+	DFA_set_transition(dfa1c, 1, '0', 0);
+	DFA_set_transition(dfa1c, 1, '1', 1);
+	DFA_set_accepting(dfa1c, 0, false);
+	DFA_set_accepting(dfa1c, 1, true);
+	if (DFA_execute(dfa1c, input)){
+		printf("Accept 1c\n");
+	} else {
+		printf("Fail 1c\n");
+	}
 }
+
+void dfa1d(char* input){
+	DFA dfa1c = new_DFA(4);
+	DFA_set_transition(dfa1d, 0, '0', 1);
+	DFA_set_transition(dfa1d, 0, '1', 2);
+	DFA_set_transition(dfa1d, 1, '0', 0);
+	DFA_set_transition(dfa1d, 1, '1', 3);
+	DFA_set_transition(dfa1d, 2, '0', 3);
+	DFA_set_transition(dfa1d, 2, '1', 0);
+	DFA_set_transition(dfa1d, 3, '0', 2);
+	DFA_set_transition(dfa1d, 3, '1', 1);
+	DFA_set_accepting(dfa1d, 0, true);
+	DFA_set_accepting(dfa1d, 1, false);
+	DFA_set_accepting(dfa1d, 2, false);
+	DFA_set_accepting(dfa1d, 3, false);
+	if (DFA_execute(dfa1d, input)){
+		printf("Accept 1d\n");
+	} else {
+		printf("Fail 1d\n");
+	}
+}
+
+//int main(int argc, char* argv[]){
+//	char input[50];
+//	printf("Type a character: ");
+//	scanf("%s", input);
+//    dfapart1(input);
+//}
