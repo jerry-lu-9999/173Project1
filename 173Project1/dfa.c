@@ -209,9 +209,9 @@ void dfa1a(char* input) {
    	DFA_set_accepting(dfa1a, 5, false);
     DFA_set_accepting(dfa1a, 6, true);
     if(DFA_execute(dfa1a, input)){
-        printf("Result for input 'csc173' is : Accept\n");
+        printf("Accept\n");
     } else {
-        printf("Result for input 'csc173' is : Fail\n");
+        printf("Fail\n");
     }
     DFA_free(dfa1a);
 }
@@ -227,14 +227,13 @@ void dfa1b(char* input){
 	DFA_set_accepting(dfa1b, 2, false);
 	DFA_set_accepting(dfa1b, 3, true);
 	if (DFA_execute(dfa1b, input)){
-        printf("Result for input is: Accept\n");
+        printf("Accept\n");
 	} else {
-        printf("Result for input is: Fail\n");
+        printf("Fail\n");
 	}
     DFA_free(dfa1b);
 }
 
-//THERE IS BUGGGGGG
 void dfa1c(char* input){
 	DFA dfa1c = new_DFA(2);
 	DFA_set_transition(dfa1c, 0, '1', 0);
@@ -244,10 +243,10 @@ void dfa1c(char* input){
 	DFA_set_accepting(dfa1c, 0, true);
 	DFA_set_accepting(dfa1c, 1, false);
 	if (DFA_execute(dfa1c, input)){
-		printf("Accept 1c\n");
+		printf("Accept\n");
 
 	} else {
-        printf("Result for input is : Fail\n");
+        printf("Fail\n");
 	}
     DFA_free(dfa1c);
 }
@@ -267,9 +266,9 @@ void dfa1d(char* input){
 	DFA_set_accepting(dfa1d, 2, false);
 	DFA_set_accepting(dfa1d, 3, false);
 	if (DFA_execute(dfa1d, input)){
-        printf("Result for input is : Accept\n");
+        printf("Accept\n");
 	} else {
-        printf("Result for input is : Fail\n");
+        printf("Fail\n");
 	}
     DFA_free(dfa1d);
 }
