@@ -7,7 +7,6 @@
 
 #ifndef _nfa_h
 #define _nfa_h
-
 #include <stdbool.h>
 #include "Set.h"
 #define NFA_INPUT 128
