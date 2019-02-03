@@ -82,11 +82,12 @@ int DFA_get_size(DFA dfa){
 int DFA_get_transition(DFA dfa, int src, char sym){
 
     int input = convertSymbtoInt(sym);
-    printf("\nthis is the current state: %d \n and this is the input: %c", src, sym);
+    // printf("\nthis is the current state: %d \n and this is the input: %c", src, sym);
     IntHashSet set = dfa ->transitionTable[src][input];
-    printf("\nthis is the set: \n");
-            IntHashSet_print(set);
-
+    // printf("\nthis is the set: \n");
+    if(IntHashSet_count(set) == false){
+        return -1;
+    }
     IntHashSetIterator iterator = IntHashSet_iterator(set);
 	int state = IntHashSetIterator_next(iterator); // state is the first element in the set
 	//printf("\nThis is the state by the iterator: %d", state);
@@ -103,7 +104,6 @@ void DFA_set_transition(DFA dfa, int src, char sym, int dst){
         // printf("we are in set transition");
     int input = convertSymbtoInt(sym);
 	IntHashSet_insert(dfa->transitionTable[src][input], dst);
-
 	dfa->currentState = dst;
 }
 
@@ -161,23 +161,24 @@ bool DFA_execute(DFA dfa, char *sym){
     dfa->currentState = 0;
     int cur;
     // go through each character of the input
-    printf("\nthis is the beginning of DFA execute");
+    // printf("\nthis is the beginning of DFA execute");
     
     for(int i = 0; i < strlen(sym); i++) {
         int input = convertSymbtoInt(sym[i]);
-
-        printf("\nThis is the current state:  %d", dfa->currentState);
-        printf("\nThis is the current input: %c   %d", sym[i], input);
-        
+        // printf("\nThis is the current state:  %d", dfa->currentState);
+        // printf("\nThis is the current input: %c   %d", sym[i], input);
         cur = DFA_get_transition(dfa, dfa->currentState, sym[i]);
-        printf("\nTHIS IS CUR: %d", cur);
+        // printf("\nTHIS IS CUR: %d", cur);
         dfa->currentState = cur;
-        
-    }
-            if(DFA_get_accepting(dfa, cur)){
-            printf("\nACCEPTING\n");
-            return true;
+        if(cur == -1){
+            // printf("FAIL\n");
+            break;
         }
+    }
+    if(cur != 1 && DFA_get_accepting(dfa, cur)){
+        // printf("\nACCEPTING\n");
+        return true;
+    } 
     return false; //change later to false
 }
 
@@ -212,6 +213,7 @@ void dfa1a(char* input) {
     } else {
     	printf("Fail 1a\n");
     }
+    DFA_free(dfa1a);
 }
 
 void dfa1b(char* input){
@@ -229,6 +231,7 @@ void dfa1b(char* input){
 	} else {
 		printf("Fail 1b\n");
 	}
+    DFA_free(dfa1b);
 }
 
 void dfa1c(char* input){
@@ -237,13 +240,14 @@ void dfa1c(char* input){
 	DFA_set_transition(dfa1c, 0, '0', 1);
 	DFA_set_transition(dfa1c, 1, '0', 0);
 	DFA_set_transition(dfa1c, 1, '1', 1);
-	DFA_set_accepting(dfa1c, 0, false);
-	DFA_set_accepting(dfa1c, 1, true);
+	DFA_set_accepting(dfa1c, 0, true);
+	DFA_set_accepting(dfa1c, 1, false);
 	if (DFA_execute(dfa1c, input)){
 		printf("Accept 1c\n");
 	} else {
 		printf("Fail 1c\n");
 	}
+    DFA_free(dfa1c);
 }
 
 void dfa1d(char* input){
@@ -265,6 +269,7 @@ void dfa1d(char* input){
 	} else {
 		printf("Fail 1d\n");
 	}
+    DFA_free(dfa1d);
 }
 
 //int main(int argc, char* argv[]){
@@ -272,4 +277,4 @@ void dfa1d(char* input){
 //	printf("Type a character: ");
 //	scanf("%s", input);
 //    dfapart1(input);
-//}
+//
