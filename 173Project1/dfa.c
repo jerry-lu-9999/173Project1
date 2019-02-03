@@ -89,10 +89,10 @@ int DFA_get_transition(DFA dfa, int src, char sym){
         return -1;
     }
     IntHashSetIterator iterator = IntHashSet_iterator(set);
-	int state = IntHashSetIterator_next(iterator); // state is the first element in the set
+	int nextState = IntHashSetIterator_next(iterator); // state is the first element in the set
 	//printf("\nThis is the state by the iterator: %d", state);
     // IntHashSet_print(set);
-    return state;
+    return nextState;
 }
 
 /**
@@ -159,7 +159,7 @@ bool DFA_execute(DFA dfa, char *sym){
     //put input inti array for list of
     //checking system to see if symbol is on the DFA_SYMBOL list?
     dfa->currentState = 0;
-    int cur;
+    int cur = 0;
     // go through each character of the input
     // printf("\nthis is the beginning of DFA execute");
     
@@ -209,9 +209,9 @@ void dfa1a(char* input) {
    	DFA_set_accepting(dfa1a, 5, false);
     DFA_set_accepting(dfa1a, 6, true);
     if(DFA_execute(dfa1a, input)){
-    	printf("Accept 1a\n");
+        printf("Result for input 'csc173' is : Accept\n");
     } else {
-    	printf("Fail 1a\n");
+        printf("Result for input 'csc173' is : Fail\n");
     }
     DFA_free(dfa1a);
 }
@@ -227,13 +227,14 @@ void dfa1b(char* input){
 	DFA_set_accepting(dfa1b, 2, false);
 	DFA_set_accepting(dfa1b, 3, true);
 	if (DFA_execute(dfa1b, input)){
-		printf("Accept 1b\n");
+        printf("Result for input is: Accept\n");
 	} else {
-		printf("Fail 1b\n");
+        printf("Result for input is: Fail\n");
 	}
     DFA_free(dfa1b);
 }
 
+//THERE IS BUGGGGGG
 void dfa1c(char* input){
 	DFA dfa1c = new_DFA(2);
 	DFA_set_transition(dfa1c, 0, '1', 0);
@@ -244,8 +245,9 @@ void dfa1c(char* input){
 	DFA_set_accepting(dfa1c, 1, false);
 	if (DFA_execute(dfa1c, input)){
 		printf("Accept 1c\n");
+
 	} else {
-		printf("Fail 1c\n");
+        printf("Result for input is : Fail\n");
 	}
     DFA_free(dfa1c);
 }
@@ -265,16 +267,56 @@ void dfa1d(char* input){
 	DFA_set_accepting(dfa1d, 2, false);
 	DFA_set_accepting(dfa1d, 3, false);
 	if (DFA_execute(dfa1d, input)){
-		printf("Accept 1d\n");
+        printf("Result for input is : Accept\n");
 	} else {
-		printf("Fail 1d\n");
+        printf("Result for input is : Fail\n");
 	}
     DFA_free(dfa1d);
 }
 
+#ifdef MAIN
 //int main(int argc, char* argv[]){
 //	char input[50];
 //	printf("Type a character: ");
 //	scanf("%s", input);
 //    dfapart1(input);
 //
+
+int main(int argc, char* argv[]){
+    int menu;
+    
+    printf("Welcome! Type in the number to select which DFA you want to test\n");
+    printf("Type 1 for 'csc173'\n");
+    printf("Type 2 for any string starts with 'cat'\n");
+    printf("Type 3 for any binary input with an even number of 0’s\n");
+    printf("Type 4 for binary input with an even number of both 0’s and 1’s\n");
+    scanf("%d", &menu);
+    if (menu == 1) {
+        printf("Testing DFA that recognizes exactly 'csc173' \n");
+        printf("Input csc173: ");
+        char input[10];
+        scanf("%s", input);
+        dfa1a(input);
+    } else if (menu == 2){
+        printf("Testing DFA that's for any string starts with 'cat', limit the length of your input under 100\n");
+        printf("Type a string:\n");
+        char input[100];
+        scanf("%s", input);
+        dfa1b(input);
+    } else if (menu == 3){
+        printf("Testing DFA that recognizes even number of 0s: \n");
+        printf("Binary input: \n");
+        char input[100];
+        scanf("%s", input);
+        dfa1c(input);
+    } else if (menu == 4){
+        printf("Testing DFA that recognizes even number of both 0s and 1s");
+        printf("Binary input: \n");
+        char input[100];
+        scanf("%s", input);
+        dfa1d(input);
+    }
+
+}
+ 
+#endif

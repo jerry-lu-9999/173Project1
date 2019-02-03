@@ -88,10 +88,10 @@ Set NFA_get_transitions(NFA nfa, int state, char sym){
             IntHashSet_print(set);
 
     IntHashSetIterator iterator = IntHashSet_iterator(set);
-	int state = IntHashSetIterator_next(iterator); // state is the first element in the set
+	//int state = IntHashSetIterator_next(iterator); // state is the first element in the set
 	//printf("\nThis is the state by the iterator: %d", state);
     // IntHashSet_print(set);
-    return state;
+    //return state;
 }
 
 /**
@@ -159,12 +159,12 @@ Set NFA_get_transitions(NFA nfa, int state, char sym){
         printf("\nThis is the current state:  %d", nfa->currentState);
         printf("\nThis is the current input: %c   %d", sym[i], input);
         
-        cur = DFA_get_transition(nfa, nfa->currentState, sym[i]);
+//        cur = NFA_get_transitions(nfa, nfa->currentState, sym[i]);
         printf("\nTHIS IS CUR: %d", cur);
         nfa->currentState = cur;
         
     }
-            if(DFA_get_accepting(nfa, cur)){
+     if(NFA_get_accepting(nfa, cur)){
             printf("\nACCEPTING\n");
             return true;
         }
@@ -177,6 +177,12 @@ Set NFA_get_transitions(NFA nfa, int state, char sym){
  void NFA_print(NFA nfa){
 
  }
-int main(int argc, char* argv[]){
 
+void nfa1a(char* input){
+    NFA nfa1a = new_NFA(5);
+//    NFA_add_transition(nfa1a, <#int src#>, <#char sym#>, <#int dst#>)
 }
+
+//int main(int argc, char* argv[]){
+//
+//}
