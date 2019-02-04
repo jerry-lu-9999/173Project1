@@ -175,7 +175,7 @@ bool DFA_execute(DFA dfa, char *sym){
             break;
         }
     }
-    if(cur != 1 && DFA_get_accepting(dfa, cur)){
+    if(cur != -1 && DFA_get_accepting(dfa, cur)){
         // printf("\nACCEPTING\n");
         return true;
     } 
@@ -186,13 +186,15 @@ bool DFA_execute(DFA dfa, char *sym){
 /**
  * Print the given DFA to System.out.
  */
-//void DFA_print(DFA dfa){
-//    for (int i = 0; i < dfa -> DFA_N_STATE; i++){
-//        for (int j = 0; j < DFA_INPUT; j++){
-//        	LinkedList_print_string_list(dfa->transitionTable[i][j]);
-//        }
-//    }
-//}
+
+void DFA_print(DFA dfa){
+   for (int i = 0; i < dfa -> DFA_N_STATE; i++){
+       for (int j = 0; j < DFA_INPUT; j++){
+       	IntHashSet_print(dfa->transitionTable[i][j]);
+       }
+   }
+}
+
 void dfa1a(char* input) {
     DFA dfa1a = new_DFA(7);
     DFA_set_transition(dfa1a, 0, 'c', 1);
