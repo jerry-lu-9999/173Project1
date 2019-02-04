@@ -46,7 +46,7 @@ NFA new_NFA(int nstates){
  * Free the given NFA.
  */
 void NFA_free(NFA nfa){
-    	if (nfa == NULL) {
+    if (nfa == NULL) {
 		return;
 	}
 	for (int i = 0; i < nfa->NFA_N_STATE; i++){
@@ -84,18 +84,6 @@ Set NFA_get_transitions(NFA nfa, int state, char sym){
     printf("\nthis is the current state: %d \n and this is the input: %c", state, sym);
     //****MUST SET STATE TO SET OF STATES INCASE IT'S MULTIPLE STATE*******//
     IntHashSet set = nfa ->transitionTable[state][input];
-    // printf("\nthis is the set: \n");
-    //         IntHashSet_print(set);
-
-    // IntHashSetIterator iterator = IntHashSet_iterator(set);
-    // IntHashSet stateSet = new_IntHashSet(3); //temporary number
-    // while(IntHashSetIterator_hasNext(iterator)){
-    //     printf("\nint the get transition iterator loop printing stateSet:");
-    //     IntHashSet_union(stateSet,set);
-    //     IntHashSet_print(stateSet);
-    //     printf("\n this is from transition iterator: %d", IntHashSetIterator_next(iterator));
-    // }
-    //  state is the first element in the set
 	printf("\nThis is the state by the iterator: %d", state);
     IntHashSet_print(set);
     return set;
@@ -163,9 +151,10 @@ Set NFA_get_transitions(NFA nfa, int state, char sym){
     IntHashSet newCur = new_IntHashSet(20);
     IntHashSet tempCur = new_IntHashSet(20);
     IntHashSet_insert(cur, nfa->currentState);
-
+    IntHashSetIterator iterator = IntHashSet_iterator(cur);
         for(int i = 0; i < strlen(sym); i++) {
-        IntHashSetIterator iterator = IntHashSet_iterator(cur);
+        
+        
         nfa->currentState = IntHashSetIterator_next(iterator); //needs to be the first element of the set
         printf("\nTHIS IS CURRENT STATE:::: %d", nfa->currentState);
         newCur = NFA_get_transitions(nfa, nfa->currentState, sym[i]);
@@ -185,16 +174,20 @@ Set NFA_get_transitions(NFA nfa, int state, char sym){
         cur = newCur;
         free(newCur);
         }
-
-        IntHashSetIterator iterator = IntHashSet_iterator(cur);
-        while(IntHashSetIterator_hasNext(iterator)){
-            int nextState = IntHashSetIterator_next(iterator);
+        free(iterator);
+        IntHashSetIterator iterator2 = IntHashSet_iterator(cur);
+        while(IntHashSetIterator_hasNext(iterator2)){
+            int nextState = IntHashSetIterator_next(iterator2);
             printf("\n.......trying to see if %d is an accepting state", nextState);
             if(NFA_get_accepting(nfa, nextState)){
                 printf("\nACCEPTING\n");
+            free(cur);
+            free(iterator2); 
             return true;
             }
         }
+        free(cur);
+        free(iterator2);
     return false; //change later to false
 
  }
@@ -223,6 +216,7 @@ Set NFA_get_transitions(NFA nfa, int state, char sym){
     } else {
     	printf("Fail 1a\n");
     }
+    NFA_free(nfa1a);
 }
 
 int main(int argc, char* argv[]){
