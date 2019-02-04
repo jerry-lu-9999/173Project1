@@ -77,4 +77,7 @@ extern bool NFA_execute(NFA nfa, char *input);
  */
 extern void NFA_print(NFA nfa);
 
+extern void nfa2a(char* input);
+
+extern void nfa2b(char* input);
 #endif

@@ -3,5 +3,6 @@
 #include "IntHashSet.h"
 
 void nfatodfa(NFA nfa) {
+    // for every current state
     
 }
