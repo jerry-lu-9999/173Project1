@@ -84,20 +84,21 @@ Set NFA_get_transitions(NFA nfa, int state, char sym){
     printf("\nthis is the current state: %d \n and this is the input: %c", state, sym);
     //****MUST SET STATE TO SET OF STATES INCASE IT'S MULTIPLE STATE*******//
     IntHashSet set = nfa ->transitionTable[state][input];
-    printf("\nthis is the set: \n");
-            IntHashSet_print(set);
+    // printf("\nthis is the set: \n");
+    //         IntHashSet_print(set);
 
-    IntHashSetIterator iterator = IntHashSet_iterator(set);
-    IntHashSet stateSet = new_IntHashSet(3); //temporary number
-    while(IntHashSetIterator_hasNext(iterator)){
-        printf("\nint the get transition iterator loop");
-        IntHashSet_union(stateSet,set);
-        printf("\n this is from transition iterator: %d", IntHashSetIterator_next(iterator));
-    }
-     // state is the first element in the set
-	//printf("\nThis is the state by the iterator: %d", state);
-    // IntHashSet_print(set);
-    return stateSet;
+    // IntHashSetIterator iterator = IntHashSet_iterator(set);
+    // IntHashSet stateSet = new_IntHashSet(3); //temporary number
+    // while(IntHashSetIterator_hasNext(iterator)){
+    //     printf("\nint the get transition iterator loop printing stateSet:");
+    //     IntHashSet_union(stateSet,set);
+    //     IntHashSet_print(stateSet);
+    //     printf("\n this is from transition iterator: %d", IntHashSetIterator_next(iterator));
+    // }
+    //  state is the first element in the set
+	printf("\nThis is the state by the iterator: %d", state);
+    IntHashSet_print(set);
+    return set;
 }
 
 /**
@@ -157,55 +158,45 @@ Set NFA_get_transitions(NFA nfa, int state, char sym){
  * the input, otherwise false.
  */
  bool NFA_execute(NFA nfa, char *sym){
-    //put input inti array for list of
-    //checking system to see if symbol is on the DFA_SYMBOL list?
     nfa->currentState = 0;
     IntHashSet cur = new_IntHashSet(20); //DUDE IDK BRUH LIKE WHAT NUMBER MAN
-    // go through each character of the input
-    printf("\nthis is the beginning of NFA execute");
-    
-    for(int i = 0; i < strlen(sym); i++) {
-        IntHashSet_free(cur); //incase it has left overs from other string
-        int input = convertSymbtoInt(sym[i]);
+    IntHashSet newCur = new_IntHashSet(20);
+    IntHashSet tempCur = new_IntHashSet(20);
+    IntHashSet_insert(cur, nfa->currentState);
 
-        printf("\nThis is the current state:  %d", nfa->currentState);
-        printf("\nThis is the current input: %c   %d", sym[i], input);
-        
-        //puts the sets that we get from NFA transitions
-        //RYING TO ADD SET INTO INT HASH SET BUT ARGUMENT ONLY TAKES IN INTEGER
-        //can you add sets is the problem??
-        
-        //returns a set so
-            IntHashSet getTransition = new_IntHashSet(20);
-            getTransition = NFA_get_transitions(nfa, nfa->currentState, sym[i]);
+        for(int i = 0; i < strlen(sym); i++) {
+        IntHashSetIterator iterator = IntHashSet_iterator(cur);
+        nfa->currentState = IntHashSetIterator_next(iterator); //needs to be the first element of the set
+        printf("\nTHIS IS CURRENT STATE:::: %d", nfa->currentState);
+        newCur = NFA_get_transitions(nfa, nfa->currentState, sym[i]);
 
-            IntHashSetIterator iterator = IntHashSet_iterator(getTransition);
-            IntHashSet stateSet = new_IntHashSet(3); //temporary number
-            while(IntHashSetIterator_hasNext(iterator)){
-                printf("\nint the EXECUTE transition iterator loop");
-                IntHashSet_insert(cur, IntHashSetIterator_next(iterator)); 
-            // IntHashSet_insert(stateSet,IntHashSetIterator_next(iterator));
-                printf("\n(inside Iterator:: THIS IS CUR: ");
-                IntHashSet_print(cur);
+        if(IntHashSetIterator_hasNext(iterator)){
+            printf("\n.....at execute HAS NEXT");
+            nfa->currentState = IntHashSetIterator_next(iterator);
+            printf("\nTHIS IS CURRENT STATE:::: %d", nfa->currentState);
+            tempCur = NFA_get_transitions(nfa, nfa->currentState, sym[i]);
+            IntHashSet_union(newCur, tempCur);
+        }
+        printf("\nAT INPUT: %d", sym[i]);
+        printf("\nTHIS IS CUR:::: " );
+        IntHashSet_print(cur);
+        printf("\nTHIS IS NEWCUR:::: " );
+        IntHashSet_print(newCur);
+        cur = newCur;
+        free(newCur);
         }
 
-
-
-        // nfa->currentState = cur; //WHAT AM I SUPPOSED TO DO WITH THIS
-        
-    }       
-
-    
         IntHashSetIterator iterator = IntHashSet_iterator(cur);
-        IntHashSet stateSet = new_IntHashSet(3); //temporary number
         while(IntHashSetIterator_hasNext(iterator)){
             int nextState = IntHashSetIterator_next(iterator);
+            printf("\n.......trying to see if %d is an accepting state", nextState);
             if(NFA_get_accepting(nfa, nextState)){
                 printf("\nACCEPTING\n");
             return true;
             }
         }
     return false; //change later to false
+
  }
 
 /**
@@ -244,3 +235,91 @@ int main(int argc, char* argv[]){
 //int main(int argc, char* argv[]){
 //
 //}
+
+
+/* TERRIBLE MESSED UP EXECUTION CODE
+    //put input inti array for list of
+    //checking system to see if symbol is on the DFA_SYMBOL list?
+    nfa->currentState = 0;
+    IntHashSet cur = new_IntHashSet(20); //DUDE IDK BRUH LIKE WHAT NUMBER MAN
+    // go through each character of the input
+    printf("\nthis is the beginning of NFA execute");
+    
+    for(int i = 0; i < strlen(sym); i++) {
+        int input = convertSymbtoInt(sym[i]);
+        // printf("\nThis is the current state:  %d", dfa->currentState);
+        // printf("\nThis is the current input: %c   %d", sym[i], input);
+        cur = NFA_get_transition(nfa, nfa->currentState, sym[i]);
+        // printf("\nTHIS IS CUR: %d", cur);
+
+        IntHashSetIterator iterator = IntHashSet_iterator(cur);
+        // nfa->currentState = IntHashSetIterator_next(iterator);
+        if(IntHashSetIterator_hasNext(iterator)){
+            // for(int j = i; j < strlen(sym); j++) {
+            // cur = NFA_get_transition(nfa, nfa->currentState, sym[i]);
+            
+            // }
+
+
+        }
+
+
+        // if(i == (strlen(sym)-1)&&IntHashSetIterator_hasNext(iterator)){
+        //     cur = IntHashSetIterator_next(iterator);
+        //     i = 0;
+        //     //NEED TO ADD TO SET OF STATES
+        // }
+        // dfa->currentState = cur;
+ 
+        if(nfa->currentState == -1){
+            // printf("FAIL\n");
+            break;
+        }
+    }
+    if(nfa->currentState != -1 && NFA_get_accepting(nfa, cur)){
+        // printf("\nACCEPTING\n");
+        return true;
+    } 
+    return false; //change later to false
+        //puts the sets that we get from NFA transitions
+        //RYING TO ADD SET INTO INT HASH SET BUT ARGUMENT ONLY TAKES IN INTEGER
+        //can you add sets is the problem??
+        
+        //returns a set so
+    //         IntHashSet getTransition = new_IntHashSet(20);
+    //         getTransition = NFA_get_transitions(nfa, nfa->currentState, sym[i]);
+
+    //         IntHashSetIterator iterator = IntHashSet_iterator(getTransition);
+    //         IntHashSet stateSet = new_IntHashSet(3); //temporary number
+    //         while(IntHashSetIterator_hasNext(iterator)){
+    //             printf("\nint the EXECUTE transition iterator loop::::::: %d", IntHashSetIterator_next(iterator));
+    //             free(iterator);
+    //             IntHashSet_insert(cur, IntHashSetIterator_next(iterator)); 
+    //             free(iterator);
+    //             nfa->currentState = IntHashSetIterator_next(iterator);
+    //             printf("\n(inside Iterator:: THIS IS CUR: %d \n", nfa -> currentState);
+    //             IntHashSet_print(cur);
+    //     }
+
+
+
+    //     // nfa->currentState = cur; //WHAT AM I SUPPOSED TO DO WITH THIS
+        
+    // }       
+
+    
+    //     IntHashSetIterator iterator = IntHashSet_iterator(cur);
+    //     IntHashSet stateSet = new_IntHashSet(3); //temporary number
+    //     while(IntHashSetIterator_hasNext(iterator)){
+    //         int nextState = IntHashSetIterator_next(iterator);
+    //         printf("\n.......trying to see if %d is an accepting state", nextState);
+    //         if(NFA_get_accepting(nfa, nextState)){
+    //             printf("\nACCEPTING\n");
+    //         return true;
+    //         }
+    //     }
+    // return false; //change later to false
+
+
+
+*/
