@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "inthashset.h": "c",
+        "stdlib.h": "c"
+    }
+}
