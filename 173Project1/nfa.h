@@ -70,14 +70,16 @@ extern bool NFA_get_accepting(NFA nfa, int state);
  * Run the given NFA on the given input string, and return true if it accepts
  * the input, otherwise false.
  */
-extern bool NFA_execute(NFA nfa, char *input);
+extern bool NFA_execute(NFA nfa, char* sym);
 
 /**
  * Print the given NFA to System.out.
  */
 extern void NFA_print(NFA nfa);
 
-extern void nfa2a(char* input);
+extern int convertSymbtoInt2(char sym);
+
+extern NFA nfa2a(char* input);
 
 extern void nfa2b(char* input);
 #endif

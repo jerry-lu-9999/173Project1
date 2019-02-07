@@ -3,6 +3,7 @@
 #include <string.h>
 #include "dfa.h"
 #include "nfa.h"
+#include "nfatodfa.h"
 
 int main(int argc, char* argv[]){
 	int menu;
@@ -51,7 +52,10 @@ int main(int argc, char* argv[]){
 			printf("Enter an input (\"quit\" to quit):\n");
 			scanf("%s", input5);
 			printf("Result for input %s:\n", input5);
-			nfa2a(input5);
+			NFA nfa = nfa2a(input5);
+			DFA dfa = nfatodfa(nfa);
+			printf("Printing out DFA from subset construction...\n");
+			DFA_print(dfa);
 		}
 		char input6[50];
 		printf("\nNFA that recognizes strings containing \"code\"...\n");
@@ -61,6 +65,11 @@ int main(int argc, char* argv[]){
 			printf("Result for input %s:\n", input6);
 			nfa2b(input6);
 		}
-    } 
+	}
+    // } else if (menu == 3){
+	// 	NFA nfa2a = nfa2a("code");
+	// 	DFA dfa2a = nfatodfa(dfa2a);
+	// }
+
 	
 }
