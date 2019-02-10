@@ -65,6 +65,13 @@ int main(int argc, char* argv[]){
 			printf("Result for input %s:\n", input6);
 			nfa2b(input6);
 		}
+	} else if (menu == 3) {
+		printf("Subset construction from NFA part 1 to a DFA...\n");
+		printf("Enter an input (\"quit\" to quit):\n");
+		NFA nfa = nfa2a(input5);
+		DFA dfa = nfatodfa(nfa);
+		printf("Printing out DFA from subset construction...\n");
+		DFA_print(dfa);
 	}
     // } else if (menu == 3){
 	// 	NFA nfa2a = nfa2a("code");
