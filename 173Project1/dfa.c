@@ -164,7 +164,7 @@ bool DFA_execute(DFA dfa, char *sym){
     // printf("\nthis is the beginning of DFA execute");
     
     for(int i = 0; i < strlen(sym); i++) {
-        int input = convertSymbtoInt(sym[i]);
+        //int input = convertSymbtoInt(sym[i]);
         // printf("\nThis is the current state:  %d", dfa->currentState);
         // printf("\nThis is the current input: %c   %d", sym[i], input);
         cur = DFA_get_transition(dfa, dfa->currentState, sym[i]);

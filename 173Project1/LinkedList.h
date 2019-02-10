@@ -18,7 +18,7 @@ typedef struct LinkedList* LinkedList;
 /**
  * Allocate, initialize and return a new (empty) LinkedList.
  */
-extern LinkedList new_LinkedList();
+extern LinkedList new_LinkedList(void);
 
 /**
  * Free the memory used for the given LinkedList.

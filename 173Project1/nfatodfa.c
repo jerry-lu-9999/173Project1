@@ -25,7 +25,7 @@ LinkedList LinkedList_add_set(LinkedList list, IntHashSet set){
 int getIndexfromList(LinkedList list, IntHashSet set){
     LinkedListIterator it1 = LinkedList_iterator(list);
     int index = 0;
-    while(LinkedListIterator_hasNext){
+    while(&LinkedListIterator_hasNext){
         if(IntHashSet_equals(LinkedListIterator_next(it1), set)){
             return index;
         }
@@ -53,7 +53,7 @@ DFA nfatodfa (NFA nfa) {
 
     int currentState = 0;
 
-    LinkedListIterator iterator = LinkedList_iterator(processingStates);
+    //LinkedListIterator iterator = LinkedList_iterator(processingStates); (never used)
 
     while(!LinkedList_isEmpty(processingStates)){
         IntHashSet pop = LinkedList_pop(processingStates);

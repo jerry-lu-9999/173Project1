@@ -52,10 +52,9 @@ int main(int argc, char* argv[]){
 			printf("Enter an input (\"quit\" to quit):\n");
 			scanf("%s", input5);
 			printf("Result for input %s:\n", input5);
-			NFA nfa = nfa2a(input5);
-			DFA dfa = nfatodfa(nfa);
-			printf("Printing out DFA from subset construction...\n");
-			DFA_print(dfa);
+			nfa2a(input5);
+			//DFA dfa = nfatodfa(nfa);
+			//printf("Printing out DFA from subset construction...\n");
 		}
 		char input6[50];
 		printf("\nNFA that recognizes strings containing \"code\"...\n");
@@ -65,11 +64,20 @@ int main(int argc, char* argv[]){
 			printf("Result for input %s:\n", input6);
 			nfa2b(input6);
 		}
+        char input7[50];
+        printf("\nNFA that recognize non-anagram of 'washington'\n");
+        while(strcmp(input7, "quit") != 0){
+            printf("Enter an input (\"quit\" to quit):\n");
+            scanf("%s", input7);
+            printf("Result for input %s:\n", input7);
+            nfa2c(input7);
+        }
 	}
-    // } else if (menu == 3){
-	// 	NFA nfa2a = nfa2a("code");
-	// 	DFA dfa2a = nfatodfa(dfa2a);
-	// }
+        else if (menu == 3){
+	 	//NFA nfa2a = nfa2a("code");
+	 	//DFA dfa2a = nfatodfa(dfa2a);
+            
+	 }
 
 	
 }

@@ -11,6 +11,10 @@
 		F5844F732202B1DA001DA8AF /* dfa.c in Sources */ = {isa = PBXBuildFile; fileRef = F5844F6E2202B1D9001DA8AF /* dfa.c */; };
 		F5844F742202B1DA001DA8AF /* strdup.c in Sources */ = {isa = PBXBuildFile; fileRef = F5844F6F2202B1D9001DA8AF /* strdup.c */; };
 		F5844F77220392BB001DA8AF /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = F5844F76220392BB001DA8AF /* Makefile */; };
+		F5C92497220D37B700D49814 /* nfatodfa.c in Sources */ = {isa = PBXBuildFile; fileRef = F5C92492220D37B700D49814 /* nfatodfa.c */; };
+		F5C92498220D37B700D49814 /* LinkedList.c in Sources */ = {isa = PBXBuildFile; fileRef = F5C92493220D37B700D49814 /* LinkedList.c */; };
+		F5C92499220D37B700D49814 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = F5C92494220D37B700D49814 /* main.c */; };
+		F5C9249C220E273000D49814 /* nfa.c in Sources */ = {isa = PBXBuildFile; fileRef = F5C9249B220E273000D49814 /* nfa.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -36,6 +40,12 @@
 		F5844F6F2202B1D9001DA8AF /* strdup.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = strdup.c; sourceTree = "<group>"; };
 		F5844F712202B1DA001DA8AF /* strdup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = strdup.h; sourceTree = "<group>"; };
 		F5844F76220392BB001DA8AF /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		F5C92491220D37B700D49814 /* nfatodfa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nfatodfa.h; sourceTree = "<group>"; };
+		F5C92492220D37B700D49814 /* nfatodfa.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = nfatodfa.c; sourceTree = "<group>"; };
+		F5C92493220D37B700D49814 /* LinkedList.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = LinkedList.c; sourceTree = "<group>"; };
+		F5C92494220D37B700D49814 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		F5C92496220D37B700D49814 /* LinkedList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinkedList.h; sourceTree = "<group>"; };
+		F5C9249B220E273000D49814 /* nfa.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = nfa.c; sourceTree = "<group>"; };
 		F5DA96FD2202AE8400070B71 /* 173Project1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = 173Project1; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -57,8 +67,14 @@
 				F5844F6B2202B1D9001DA8AF /* dfa.h */,
 				F5844F6C2202B1D9001DA8AF /* IntHashSet.c */,
 				F5844F6A2202B1D9001DA8AF /* IntHashSet.h */,
+				F5C92493220D37B700D49814 /* LinkedList.c */,
+				F5C92496220D37B700D49814 /* LinkedList.h */,
+				F5C92494220D37B700D49814 /* main.c */,
 				F5844F76220392BB001DA8AF /* Makefile */,
+				F5C9249B220E273000D49814 /* nfa.c */,
 				F5844F672202B1D9001DA8AF /* nfa.h */,
+				F5C92492220D37B700D49814 /* nfatodfa.c */,
+				F5C92491220D37B700D49814 /* nfatodfa.h */,
 				F5844F682202B1D9001DA8AF /* README.txt */,
 				F5844F6D2202B1D9001DA8AF /* Set.h */,
 				F5844F6F2202B1D9001DA8AF /* strdup.c */,
@@ -139,10 +155,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5C92497220D37B700D49814 /* nfatodfa.c in Sources */,
 				F5844F77220392BB001DA8AF /* Makefile in Sources */,
 				F5844F732202B1DA001DA8AF /* dfa.c in Sources */,
+				F5C9249C220E273000D49814 /* nfa.c in Sources */,
 				F5844F722202B1DA001DA8AF /* IntHashSet.c in Sources */,
+				F5C92498220D37B700D49814 /* LinkedList.c in Sources */,
 				F5844F742202B1DA001DA8AF /* strdup.c in Sources */,
+				F5C92499220D37B700D49814 /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,8 +218,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -251,8 +271,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -264,6 +284,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				OTHER_CFLAGS = (
 					"-Werror",
@@ -277,6 +299,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				OTHER_CFLAGS = (
 					"-Werror",
