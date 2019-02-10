@@ -72,6 +72,7 @@ extern bool NFA_get_accepting(NFA nfa, int state);
  */
 extern bool NFA_execute(NFA nfa, char* sym);
 
+extern bool anagram_execute(NFA nfa, char* sym);
 /**
  * Print the given NFA to System.out.
  */
@@ -81,5 +82,7 @@ extern int convertSymbtoInt2(char sym);
 
 extern NFA nfa2a(char* input);
 
-extern void nfa2b(char* input);
+extern NFA nfa2b(char* input);
+
+extern void nfa2c(char* input);
 #endif
