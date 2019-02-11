@@ -103,9 +103,19 @@ void DFA_set_transition(DFA dfa, int src, char sym, int dst){
     //make the sym into a ASCII value
         // printf("we are in set transition");
     int input = convertSymbtoInt(sym);
+    printf("\n----> insering from state %d input: %c at dst %d\n\n", src, sym, dst);
 	IntHashSet_insert(dfa->transitionTable[src][input], dst);
 	dfa->currentState = dst;
 }
+
+// void DFA_set_transitionIHS(DFA dfa, int src, char sym, IntHashSet dst){
+//     //make the sym into a ASCII value
+//         // printf("we are in set transition");
+//     int input = convertSymbtoInt(sym);
+//     printf("\n----> insering from state %d input: %c at dst %d\n\n", src, sym, dst);
+// 	IntHashSet_insert(dfa->transitionTable[src][input], dst);
+// 	dfa->currentState = dst;
+// }
 
 /**
  * Set the transitions of the given DFA for each symbol in the given str.
@@ -166,15 +176,14 @@ bool DFA_execute(DFA dfa, char *sym){
         // printf("\nThis is the current state:  %d", dfa->currentState);
         // printf("\nThis is the current input: %c   %d", sym[i], input);
         cur = DFA_get_transition(dfa, cur, sym[i]);
-        // // printf("\nTHIS IS CUR: %d", cur);
+        printf("\nTHIS IS CUR: %d", cur);
         dfa->currentState = cur;
         if(cur == -1){
-            // printf("FAIL\n");
+            printf("FAIL\n");
             break;
         }
     }
     if(cur != -1 && DFA_get_accepting(dfa, cur)){
-        // printf("\nACCEPTING\n");
         return true;
     } 
     return false;
@@ -187,6 +196,7 @@ bool DFA_execute(DFA dfa, char *sym){
 
 void DFA_print(DFA dfa){
    for (int i = 0; i < dfa -> DFA_N_STATE; i++){
+       printf("\n%d\t",i);
        for (int j = 0; j < DFA_INPUT; j++){
        	IntHashSet_print(dfa->transitionTable[i][j]);
        }

@@ -74,12 +74,13 @@ int main(int argc, char* argv[]){
 	}
         else if (menu == 3){
 		char input8[50];
-	 	printf("Subset construction from NFA part 2 to a DFA...\n");
+	 	printf("Subset construction from NFA part 1 to a DFA...\n");
 		printf("Enter an input (\"quit\" to quit):\n");
 		scanf("%s", input8);
 		NFA nfa = nfa2b(input8);
 		DFA dfa = nfatodfa(nfa);
-		// printf("Printing out DFA from subset construction...\n");
+		DFA_print(dfa);
+		printf("Printing out DFA from subset construction...\n");
 		if(DFA_execute(dfa, input8)){
 			printf("DFA construction accepted the current nfa.\n");
 		} else {
