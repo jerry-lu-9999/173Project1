@@ -1,5 +1,6 @@
 #include <stdbool.h>
 #include <stdio.h>
+#include <string.h>
 #include "dfa.h"
 #include "nfa.h"
 #include "IntHashSet.h"
@@ -40,7 +41,7 @@ char integerToSymbol(int i){
 }
 
 DFA nfatodfa (NFA nfa) {
-
+    
     DFA newdfa = new_DFA(20);
     LinkedList allStates = new_LinkedList();
     LinkedList processingStates = new_LinkedList();
@@ -52,8 +53,8 @@ DFA nfatodfa (NFA nfa) {
     LinkedList_add_at_front(processingStates, cur);
 
     int currentState = 0;
-
-    //LinkedListIterator iterator = LinkedList_iterator(processingStates); (never used)
+    int indexCur = 0;
+    int destination = 0;
 
     while(!LinkedList_isEmpty(processingStates)){
         IntHashSet pop = LinkedList_pop(processingStates);
@@ -63,30 +64,45 @@ DFA nfatodfa (NFA nfa) {
         while(IntHashSetIterator_hasNext(curIterator)){
         currentState = IntHashSetIterator_next(curIterator);
         
-        for(int i = 0; i < 36; i++){
+            for(int i = 0; i < 36; i++){
 
-            newCur = (IntHashSet) NFA_get_transitions(nfa, currentState, integerToSymbol(i));
-            if(!LinkedList_contains_set(allStates, newCur)){
-                printf("Jumped in here!\n");
-                LinkedList_add_at_end(allStates,newCur);
-                LinkedList_add_at_end(processingStates, newCur);
+                newCur = (IntHashSet) NFA_get_transitions(nfa, currentState, integerToSymbol(i));
+                printf("\nAt input character %c \n", integerToSymbol(i));
+                if(!LinkedList_contains_set(allStates, newCur)){
+                    // printf("Jumped in here!\n");
+                    LinkedList_add_at_end(allStates,newCur);
+                    LinkedList_add_at_end(processingStates, newCur);
+                }
+                printf("This is cur: %s \n", IntHashSet_toString(cur));
+                printf("This is newCur: %s \n", IntHashSet_toString(newCur));
+                indexCur = getIndexfromList(allStates, cur);
+                printf("Index of cur in allStates %d\n", indexCur);
+                destination = getIndexfromList(allStates, newCur);
+                printf("Index of destination in allStates %d\n", destination);
+                DFA_set_transition(newdfa, indexCur, integerToSymbol(i), destination);
+                
             }
-            printf("This is cur: %s \n", IntHashSet_toString(cur));
-            printf("This is newCur: %s \n", IntHashSet_toString(newCur));
-            printf("Reached this point!\n");
-            int indexCur = getIndexfromList(allStates, cur);
-            printf("Index of cur in allStates %d\n", indexCur);
-            int destination = getIndexfromList(allStates, newCur);
-            printf("Index of destination in allStates %d\n", destination);
-
-            DFA_set_transition(newdfa, indexCur, integerToSymbol(i), destination);
-        }
         }  
+    }
 
-
+    LinkedListIterator itAccept = LinkedList_iterator(allStates);
+    while(LinkedListIterator_hasNext(itAccept)){
+        IntHashSet curSet = LinkedListIterator_next(itAccept);
+        IntHashSetIterator itState = IntHashSet_iterator(curSet);
+        while(IntHashSetIterator_hasNext(itState)){
+            int acceptState = IntHashSetIterator_next(itState);
+            if(NFA_get_accepting(nfa, acceptState)){
+                DFA_set_accepting(newdfa, getIndexfromList(allStates,curSet), true);
+                printf("DFA accepting state: %d\n", getIndexfromList(allStates,curSet));
+            } else {
+                DFA_set_accepting(newdfa, getIndexfromList(allStates,curSet), false);
+            }
+        }
     }
     return newdfa;  
 }
+
+
 
 
 

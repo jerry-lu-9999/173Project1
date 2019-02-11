@@ -156,8 +156,6 @@ bool DFA_get_accepting(DFA dfa, int state){
  * the input, otherwise false.
  */
 bool DFA_execute(DFA dfa, char *sym){
-    //put input inti array for list of
-    //checking system to see if symbol is on the DFA_SYMBOL list?
     dfa->currentState = 0;
     int cur = 0;
     // go through each character of the input
@@ -167,8 +165,8 @@ bool DFA_execute(DFA dfa, char *sym){
         //int input = convertSymbtoInt(sym[i]);
         // printf("\nThis is the current state:  %d", dfa->currentState);
         // printf("\nThis is the current input: %c   %d", sym[i], input);
-        cur = DFA_get_transition(dfa, dfa->currentState, sym[i]);
-        // printf("\nTHIS IS CUR: %d", cur);
+        cur = DFA_get_transition(dfa, cur, sym[i]);
+        // // printf("\nTHIS IS CUR: %d", cur);
         dfa->currentState = cur;
         if(cur == -1){
             // printf("FAIL\n");
@@ -179,7 +177,7 @@ bool DFA_execute(DFA dfa, char *sym){
         // printf("\nACCEPTING\n");
         return true;
     } 
-    return false; //change later to false
+    return false;
 }
 
 

@@ -11,5 +11,4 @@ extern bool LinkedList_contains_set(LinkedList list, IntHashSet set);
 extern LinkedList LinkedList_add_set(LinkedList list, IntHashSet set);
 extern int getIndexfromList(LinkedList list, IntHashSet set);
 extern DFA nfatodfa (NFA nfa);
-
 #endif

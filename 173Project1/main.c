@@ -52,9 +52,7 @@ int main(int argc, char* argv[]){
 			printf("Enter an input (\"quit\" to quit):\n");
 			scanf("%s", input5);
 			printf("Result for input %s:\n", input5);
-			nfa2a(input5);
-			//DFA dfa = nfatodfa(nfa);
-			//printf("Printing out DFA from subset construction...\n");
+			nfa2a(input5);			
 		}
 		char input6[50];
 		printf("\nNFA that recognizes strings containing \"code\"...\n");
@@ -75,12 +73,18 @@ int main(int argc, char* argv[]){
 
 	}
         else if (menu == 3){
-	 	printf("Subset construction from NFA part 1 to a DFA...\n");
+		char input8[50];
+	 	printf("Subset construction from NFA part 2 to a DFA...\n");
 		printf("Enter an input (\"quit\" to quit):\n");
-		NFA nfa = nfa2a(input5);
+		scanf("%s", input8);
+		NFA nfa = nfa2b(input8);
 		DFA dfa = nfatodfa(nfa);
-		printf("Printing out DFA from subset construction...\n");
-		DFA_print(dfa);
+		// printf("Printing out DFA from subset construction...\n");
+		if(DFA_execute(dfa, input8)){
+			printf("DFA construction accepted the current nfa.\n");
+		} else {
+			printf("DFA construction doesn't accept!!\n");
+		}
             
 	 }
 
