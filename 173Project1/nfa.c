@@ -185,9 +185,9 @@ NFA nfa2a(char* input) {
     NFA_set_accepting(nfa2a, 3, false);
     NFA_set_accepting(nfa2a, 4, true);
     if(NFA_execute(nfa2a, input)){
-        printf("Accept 2a\n");
+        printf("\nAccept 2a\n\n");
     } else {
-        printf("Fail 2a\n");
+        printf("\nFail 2a\n\n");
     }
     return nfa2a;
 }
@@ -206,9 +206,9 @@ NFA nfa2b(char* input) {
     NFA_set_accepting(nfa2b, 3, false);
     NFA_set_accepting(nfa2b, 4, true);
     if(NFA_execute(nfa2b, input)){
-        printf("Accept 2b\n");
+        printf("\nAccept 2b\n\n");
     } else {
-        printf("Fail 2b\n");
+        printf("\nFail 2b\n\n");
     }
     return nfa2b;
 }
@@ -256,9 +256,9 @@ void nfa2c(char* input){
     NFA_set_accepting(nfa2c, 16, false);
     NFA_set_accepting(nfa2c, 18, false);
     if(NFA_execute(nfa2c, input)){
-        printf("Accept 2c\n");
+        printf("\nAccept 2c\n\n");
     } else {
-        printf("Fail 2c\n");
+        printf("\nFail 2c\n\n");
     }
 }
 
@@ -287,9 +287,9 @@ void nfa2d(char* input) {
     NFA_set_accepting(nfa2d, 7, true);
 
     if(NFA_execute(nfa2d, input)){
-        printf("Accept 2d\n");
+        printf("\nAccept 2d\n\n");
     } else {
-        printf("Fail 2d\n");
+        printf("\nFail 2d\n\n");
     }
 
 }

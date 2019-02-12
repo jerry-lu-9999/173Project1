@@ -1,5 +1,6 @@
 #include <stdbool.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "dfa.h"
 #include "nfa.h"
@@ -41,6 +42,17 @@ int getIndexfromList(LinkedList list, IntHashSet set)
         index++;
     }
     return index;
+}
+
+int countLinkedList(LinkedList list) {
+    LinkedListIterator it = LinkedList_iterator(list);
+    int count = 0;
+    while (LinkedListIterator_hasNext(it))
+    {
+        void *data = LinkedListIterator_next(it);
+        count++;
+    }
+    return count;
 }
 
 char integerToSymbol(int i)
@@ -101,10 +113,13 @@ DFA nfatodfa(NFA nfa)
             indexCur = getIndexfromList(allStates, cur);
             destination = getIndexfromList(allStates, unionSet[i]);
 
-            DFA_set_transition(newdfa, indexCur, integerToSymbol(i), destination);            
+            DFA_set_transition(newdfa, indexCur, integerToSymbol(i), destination);   
+
+
         }
     }
 
+    printf("The number of states in the resulting DFA: %d\n", countLinkedList(allStates));
     LinkedListIterator itAccept = LinkedList_iterator(allStates);
     while (LinkedListIterator_hasNext(itAccept))
     {
@@ -123,5 +138,6 @@ DFA nfatodfa(NFA nfa)
             }
         }
     }
+
     return newdfa;
 }
