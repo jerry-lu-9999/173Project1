@@ -90,4 +90,5 @@ extern void dfa1c(char* input);
 
 extern void dfa1d(char* input);
 
+extern void dfa1e(char* input);
 #endif

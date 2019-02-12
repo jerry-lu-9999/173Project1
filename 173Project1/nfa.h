@@ -85,4 +85,6 @@ extern NFA nfa2a(char* input);
 extern NFA nfa2b(char* input);
 
 extern void nfa2c(char* input);
+
+extern void nfa2d(char* input);
 #endif

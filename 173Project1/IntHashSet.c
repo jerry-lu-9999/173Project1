@@ -149,9 +149,7 @@ void IntHashSet_union(IntHashSet this, const IntHashSet other) {
 	for (int index=0; index < other->size; index++) {
 		for (Node* p=other->buckets[index]; p != NULL; p=p->next) {
 			int element = p->element;
-			// printf("printing element... %d\n", element);
 			IntHashSet_insert(this, element);
-			IntHashSet_print(this);
 		}
 	}
 }

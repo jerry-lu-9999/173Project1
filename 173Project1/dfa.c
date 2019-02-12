@@ -82,16 +82,12 @@ int DFA_get_size(DFA dfa){
 int DFA_get_transition(DFA dfa, int src, char sym){
 
     int input = convertSymbtoInt(sym);
-    // printf("\nthis is the current state: %d \n and this is the input: %c", src, sym);
     IntHashSet set = dfa ->transitionTable[src][input];
-    // printf("\nthis is the set: \n");
     if(IntHashSet_count(set) == false){
         return -1;
     }
     IntHashSetIterator iterator = IntHashSet_iterator(set);
 	int nextState = IntHashSetIterator_next(iterator); // state is the first element in the set
-	//printf("\nThis is the state by the iterator: %d", state);
-    // IntHashSet_print(set);
     return nextState;
 }
 
@@ -100,22 +96,11 @@ int DFA_get_transition(DFA dfa, int src, char sym){
  * sym to be the state dst.
  */
 void DFA_set_transition(DFA dfa, int src, char sym, int dst){
-    //make the sym into a ASCII value
-        // printf("we are in set transition");
     int input = convertSymbtoInt(sym);
-    printf("\n----> insering from state %d input: %c at dst %d\n\n", src, sym, dst);
 	IntHashSet_insert(dfa->transitionTable[src][input], dst);
 	dfa->currentState = dst;
 }
 
-// void DFA_set_transitionIHS(DFA dfa, int src, char sym, IntHashSet dst){
-//     //make the sym into a ASCII value
-//         // printf("we are in set transition");
-//     int input = convertSymbtoInt(sym);
-//     printf("\n----> insering from state %d input: %c at dst %d\n\n", src, sym, dst);
-// 	IntHashSet_insert(dfa->transitionTable[src][input], dst);
-// 	dfa->currentState = dst;
-// }
 
 /**
  * Set the transitions of the given DFA for each symbol in the given str.
@@ -144,7 +129,6 @@ void DFA_set_transition_all(DFA dfa, int src, int dst) {
  * Set whether the given DFA's state is accepting or not.
  */
 void DFA_set_accepting(DFA dfa, int state, bool value){
-        // printf("we are in set accepting");
 	if(value == true){
 		dfa -> acceptingState = state;
 	}
@@ -168,18 +152,10 @@ bool DFA_get_accepting(DFA dfa, int state){
 bool DFA_execute(DFA dfa, char *sym){
     dfa->currentState = 0;
     int cur = 0;
-    // go through each character of the input
-    // printf("\nthis is the beginning of DFA execute");
-    
     for(int i = 0; i < strlen(sym); i++) {
-        //int input = convertSymbtoInt(sym[i]);
-        // printf("\nThis is the current state:  %d", dfa->currentState);
-        // printf("\nThis is the current input: %c   %d", sym[i], input);
         cur = DFA_get_transition(dfa, cur, sym[i]);
-        printf("\nTHIS IS CUR: %d", cur);
         dfa->currentState = cur;
         if(cur == -1){
-            printf("FAIL\n");
             break;
         }
     }
@@ -196,9 +172,7 @@ bool DFA_execute(DFA dfa, char *sym){
 
 void DFA_print(DFA dfa){
    for (int i = 0; i < dfa -> DFA_N_STATE; i++){
-       printf("\n%d\t",i);
        for (int j = 0; j < DFA_INPUT; j++){
-       	IntHashSet_print(dfa->transitionTable[i][j]);
        }
    }
 }
@@ -281,6 +255,29 @@ void dfa1d(char* input){
         printf("Fail\n");
 	}
     DFA_free(dfa1d);
+}
+
+// DFA that recognizes binary strings starting with 1 and ending with 0
+void dfa1e(char* input){
+    DFA dfa1e = new_DFA(4);
+    DFA_set_transition(dfa1e, 0, '1', 1);
+	DFA_set_transition(dfa1e, 0, '0', 3);
+	DFA_set_transition(dfa1e, 1, '0', 2);
+	DFA_set_transition(dfa1e, 1, '1', 1);
+	DFA_set_transition(dfa1e, 2, '0', 2);
+	DFA_set_transition(dfa1e, 2, '1', 1);
+	DFA_set_transition(dfa1e, 3, '0', 3);
+	DFA_set_transition(dfa1e, 3, '1', 3);
+	DFA_set_accepting(dfa1e, 0, false);
+	DFA_set_accepting(dfa1e, 1, false);
+	DFA_set_accepting(dfa1e, 2, true);
+	DFA_set_accepting(dfa1e, 3, false);
+	if (DFA_execute(dfa1e, input)){
+        printf("Accept\n");
+	} else {
+        printf("Fail\n");
+	}
+    DFA_free(dfa1e);
 }
 
 #ifdef MAIN

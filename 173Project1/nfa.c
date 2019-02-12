@@ -81,11 +81,7 @@ int NFA_get_size(NFA nfa){
  */
 Set NFA_get_transitions(NFA nfa, int state, char sym){
     int input = convertSymbtoInt2(sym);
-    //printf("\nthis is the current state: %d \n and this is the input: %c", state, sym);
-    //****MUST SET STATE TO SET OF STATES INCASE IT'S MULTIPLE STATE*******//
     IntHashSet set = nfa ->transitionTable[state][input];
-    //printf("\nThis is the state by the iterator: %d", state);
-    //IntHashSet_print(set);
     return set;
 }
 
@@ -94,8 +90,6 @@ Set NFA_get_transitions(NFA nfa, int state, char sym){
  * state src on input symbol sym.
  */
 void NFA_add_transition(NFA nfa, int src, char sym, int dst){
-    //make the sym into a ASCII value
-    // printf("we are in set transition");
     int input = convertSymbtoInt2(sym);
     IntHashSet_insert(nfa->transitionTable[src][input], dst);
     nfa->currentState = dst;
@@ -105,7 +99,6 @@ void NFA_add_transition(NFA nfa, int src, char sym, int dst){
  * Add a transition for the given NFA for each symbol in the given str.
  */
 void NFA_add_transition_str(NFA nfa, int src, char *str, int dst){
-    //do we need?
 }
 
 /**
@@ -117,10 +110,6 @@ void NFA_add_transition_all(NFA nfa, int src, int dst){
         int input = convertSymbtoInt2(inputSymb[i]);
         IntHashSet_insert(nfa->transitionTable[src][input], dst);
     }
-    // for(int i = 0; i < NFA_INPUT; i++){
-    //     IntHashSet_insert(nfa->transitionTable[src][i], dst);
-    // }
-    //we have questionable dfa code
 }
 
 /**
@@ -143,39 +132,6 @@ bool NFA_get_accepting(NFA nfa, int state){
  * Run the given NFA on the given input string, and return true if it accepts
  * the input, otherwise false.
  */
-//bool NFA_execute(NFA nfa, char *sym){
-//    nfa->currentState = 0;
-//    IntHashSet cur = new_IntHashSet(20);
-//    IntHashSet newCur = new_IntHashSet(20);
-//    IntHashSet tempCur = new_IntHashSet(20);
-//    IntHashSet_insert(cur, nfa->currentState);
-//    for(int i = 0; i < strlen(sym); i++) {//Iterating over the string
-//        newCur = new_IntHashSet(20);
-//        IntHashSetIterator iterator = IntHashSet_iterator(cur);
-//
-//        while(IntHashSetIterator_hasNext(iterator)){
-//            nfa->currentState = IntHashSetIterator_next(iterator);
-//
-//            tempCur = NFA_get_transitions(nfa, nfa->currentState, sym[i]);
-//            IntHashSet_union(newCur, tempCur);
-//
-//        }
-//        cur = newCur;
-//    }
-//    IntHashSetIterator iterator2 = IntHashSet_iterator(cur);
-//    while(IntHashSetIterator_hasNext(iterator2)){
-//        int nextState = IntHashSetIterator_next(iterator2);
-//        if(NFA_get_accepting(nfa, nextState)){
-//            printf("\nACCEPTING\n");
-//
-//            return true;
-//        }
-//    }
-//
-//    return false;
-//
-//}
-
 bool NFA_execute(NFA nfa, char* sym){
     nfa->currentState = 0;
     IntHashSet cur = new_IntHashSet(20);
@@ -203,7 +159,6 @@ bool NFA_execute(NFA nfa, char* sym){
     while(IntHashSetIterator_hasNext(iterator2)){
         int nextState = IntHashSetIterator_next(iterator2);
         if(NFA_get_accepting(nfa, nextState)){
-            printf("\nACCEPTING\n");
             return true;
         }
     }
@@ -305,6 +260,38 @@ void nfa2c(char* input){
     } else {
         printf("Fail 2c\n");
     }
+}
+
+void nfa2d(char* input) {
+    NFA nfa2d = new_NFA(8);
+    NFA_add_transition_all(nfa2d, 0, 0);
+    NFA_add_transition(nfa2d, 0, 'e', 1);
+    NFA_add_transition(nfa2d, 1, 'l', 2);
+    NFA_add_transition(nfa2d, 2, 'b', 5);
+
+    NFA_add_transition(nfa2d, 0, 'b', 3);
+    NFA_add_transition(nfa2d, 3, 'e', 4);
+    NFA_add_transition(nfa2d, 4, 'l', 5);
+
+    NFA_add_transition(nfa2d, 5, 'o', 6);
+    NFA_add_transition(nfa2d, 6, 'w', 7);
+
+    NFA_set_accepting(nfa2d, 0, false);
+    NFA_set_accepting(nfa2d, 1, false);
+    NFA_set_accepting(nfa2d, 2, false);
+    NFA_set_accepting(nfa2d, 3, false);
+    NFA_set_accepting(nfa2d, 4, false);
+    NFA_set_accepting(nfa2d, 5, false);
+    NFA_set_accepting(nfa2d, 6, false);
+
+    NFA_set_accepting(nfa2d, 7, true);
+
+    if(NFA_execute(nfa2d, input)){
+        printf("Accept 2d\n");
+    } else {
+        printf("Fail 2d\n");
+    }
+
 }
 
 #ifdef MAIN
